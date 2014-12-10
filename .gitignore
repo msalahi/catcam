@@ -1,0 +1,4 @@
+__pycache__/
+*.py[cod]
+video_config.py
+funs.py
