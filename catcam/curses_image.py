@@ -40,6 +40,14 @@ class CursesWindow(object):
         curses.echo()
         curses.endwin()
 
+    def __enter__(self):
+        """ no additional setup needed """
+        return self
+
+    def __exit__(self, exception_type, exception, traceback):
+        """ just proxy to regular close() """
+        self.close()
+
     def use_black_text(self):
         for i in range(curses.COLORS):
             curses.init_pair(i, 0, i)
