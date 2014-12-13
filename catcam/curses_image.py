@@ -23,7 +23,7 @@ class CursesFrameRenderer(object):
         colors = self.color_transformer.nearest_neighbors(arr)
         return CursesFrame(characters, colors)
 
-        
+
 class CursesWindow(object):
     def __init__(self):
         self.screen = curses.initscr()
@@ -32,6 +32,21 @@ class CursesWindow(object):
         curses.curs_set(0)
         self.use_black_text()
         self.shape = (curses.COLS - 1, curses.LINES - 1)
+
+    def close(self):
+        """ Terminates the curses application. """
+        curses.nocbreak()
+        self.screen.keypad(0)
+        curses.echo()
+        curses.endwin()
+
+    def __enter__(self):
+        """ no additional setup needed """
+        return self
+
+    def __exit__(self, exception_type, exception, traceback):
+        """ just proxy to regular close() """
+        self.close()
 
     def use_black_text(self):
         for i in range(curses.COLORS):
