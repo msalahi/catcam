@@ -34,17 +34,15 @@ class CursesWindow(object):
         self.shape = (curses.COLS - 1, curses.LINES - 1)
 
     def use_black_text(self):
-        for i in range(curses.COLORS):
-            curses.init_pair(i, 0, i)
+        black_foreground = 0
+        for color in range(curses.COLORS):
+            curses.init_pair(color, black_foreground, color)
 
     def draw(self, curses_frame):
         nrows, ncols = self.shape[1], self.shape[0]
         for row in range(nrows):
             for col in range(ncols):
-                self.screen.addch(
-                    row,
-                    col,
+                self.screen.addch(row, col,
                     curses_frame.characters[row][col],
                     curses.color_pair(curses_frame.colors[row][col]))
-            self.screen.addch(row, ncols, "\n")
         self.screen.refresh()

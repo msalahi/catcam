@@ -1,5 +1,13 @@
+"""
+XTerm-256 colorscheme. The first color pair is a black background
+with white text. Since we use black text as shading, the white
+text color pair is unwanted. Thus, we pretend the first color
+is some huge value that will never be chosen to avoid getting
+white text in our output.
+"""
+    
+
 xterm_256_colors = [
-    #(0, 0, 0),
     (10000, 10000, 10000),
     (128, 0, 0),
     (0, 128, 0),
