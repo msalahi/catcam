@@ -1,5 +1,6 @@
 __pycache__/
 *.egg-info/
 *.py[cod]
+*.swp
 video_config.py
 funs.py
