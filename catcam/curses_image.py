@@ -11,6 +11,11 @@ class CursesFrame(object):
         self.characters = characters
         self.colors = colors
 
+    def __eq__(self, other):
+        return (isinstance(other, CursesFrame) and
+               np.array_equal(self.characters, other.characters) and
+               np.array_equal(self.colors, other.colors))
+
 
 class CursesFrameRenderer(object):
     """ Transforms images into CursesFrames """    

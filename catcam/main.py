@@ -1,10 +1,6 @@
 from catcam.video_stream import VideoStream
-from catcam.video_config import config
 from catcam.curses_image import CursesWindow, CursesFrameRenderer
-import time
-import curses
-import sys
-import signal
+import time, curses, sys, os, signal
 
 
 def report_framerate_and_exit(signal, frame):
@@ -20,9 +16,8 @@ if __name__ == "__main__":
     t = time.time()
     signal.signal(signal.SIGINT, report_framerate_and_exit)
     with CursesWindow() as curses_window:
-        url = config['url']
-        auth = (config['user'], config['password'])
-        video_stream = VideoStream(url, auth)
+        url = os.getenv('CATCAM_URL')
+        video_stream = VideoStream(url)
         curses_renderer = CursesFrameRenderer(curses_window.shape)
         for frame in video_stream.iter_frames():
             curses_frame = curses_renderer.render_frame(frame)
