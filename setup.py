@@ -10,5 +10,7 @@ setup(
         "numpy==1.9.1",
         "requests==2.4.3",
         "scikit-learn==0.15.2",
-        "scipy==0.14.0"]
+        "scipy==0.14.0"],
+    entry_points = {'console_scripts': 
+        ['catcam = catcam.__main__:main']}
 )
